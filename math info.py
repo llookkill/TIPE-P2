@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Created on Wed Apr 25 09:17:08 2018
 
@@ -90,7 +89,7 @@ class Point:
                 prod = self + prod
             return(prod)
         else :
-            raise ValueError("Expected n to be an positiv integer")
+            raise ValueError("Expected n to be a positiv integer")
             
 class Inf(Point):
     
@@ -104,6 +103,7 @@ class Inf(Point):
     def __neg__(self):
         """-0 = 0"""
         return self
-
+    
+#pre-defined curve
 El=EllipticCurve(3,5)
 A,B=Point(El,-1,1),Point(El,1,3)
