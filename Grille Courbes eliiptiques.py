@@ -2,7 +2,7 @@
 """
 Created on Wed Apr 25 14:01:19 2018
 
-@author: Durand Théophane
+@author: urand Théophane
 """
 import tkinter as tk
 p = 37
@@ -46,5 +46,8 @@ if __name__=="__main__":
             for x in range (36):
                 for y in range (36):
                     if (y**2 == x**3 + a * x + b):
-                        app.placePoint(x, y)
+                        Eab.add((x, y))
+
+    for i in Eab:
+        app.placePoint(i)
     app.mainloop() 
