@@ -2,7 +2,7 @@
 """
 Created on Wed Apr 25 14:01:19 2018
 
-@author: duran
+@author: Durand Théophane
 """
 import tkinter as tk
 p = 37
@@ -35,10 +35,19 @@ class App(tk.Tk):
     def placePoint(self, p):
         Px = p[0]*500/36 + 50
         Py = 500 - p[1]*500/36 + 50
-        self.can.create_oval(Px-2, Py-2, Px+2, Py+2, fill = "red")
+        self.can.create_oval(Px-3, Py-3, Px+3, Py+3, fill = "red")
                     
         
 if __name__=="__main__":
     app = App()
-    app.placePoint((10,30))
+    Eab = set()
+    for a in range (36):
+        for b in range (36):
+            for x in range (36):
+                for y in range (36):
+                    if (y**2 == x**3 + a * x + b):
+                        Eab.add((x, y))
+
+    for i in Eab:
+        app.placePoint(i)
     app.mainloop() 
