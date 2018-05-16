@@ -46,8 +46,5 @@ if __name__=="__main__":
             for x in range (36):
                 for y in range (36):
                     if (y**2 == x**3 + a * x + b):
-                        Eab.add((x, y))
-
-    for i in Eab:
-        app.placePoint(i)
+                        app.placePoint(x, y)
     app.mainloop() 
