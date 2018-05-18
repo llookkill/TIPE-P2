@@ -7,7 +7,6 @@ Created on Wed Apr 25 14:01:19 2018
 import tkinter as tk
 p = 37
 a, b = 14,31
-Eab = list()
 class App(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
@@ -23,31 +22,45 @@ class App(tk.Tk):
             self.can.create_line(550-i*500/36, 545, 550-i*500/36, 555, width = 2)
             self.can.create_line(550-i*500/36, 0, 550-i*500/36, 600)
             self.can.create_text(550-i*500/36,565, text = str(36-i))
-          
-        for x in range (p):
-            for y in range (p):
-                if (y**2==x**3+a*x+b):
-                    Eab.append((x, y))
+
         
-        for i in Eab:
-            self.can.create_text(i[0], i[1], text = "I")
-        
-    def placePoint(self, p):
+    def placePoint(self, p, color):
         Px = p[0]*500/36 + 50
         Py = 500 - p[1]*500/36 + 50
-        self.can.create_oval(Px-3, Py-3, Px+3, Py+3, fill = "red")
+        self.can.create_oval(Px-5, Py-5, Px+5, Py+5, fill = color)
                     
         
 if __name__=="__main__":
     app = App()
     Eab = set()
-    for a in range (36):
-        for b in range (36):
-            for x in range (36):
-                for y in range (36):
-                    if (y**2 == x**3 + a * x + b):
-                        Eab.add((x, y))
-
+    a = 14
+    b = 7
+    for x in range (37):
+        for y in range (37):
+            if ((y**2-x**3-a*x-b)%37 == 0):
+                Eab.add((x, y))
     for i in Eab:
-        app.placePoint(i)
+        app.placePoint(i, "magenta")
+        
+    Eab = set()
+    a = 22
+    b = 13
+    for x in range (37):
+        for y in range (37):
+            if ((y**2-x**3-a*x-b)%37 == 0):
+                Eab.add((x, y))
+    for i in Eab:
+        app.placePoint(i, "green")
+        
+    Eab = set()
+    a = 33
+    b = 17
+    for x in range (37):
+        for y in range (37):
+            if ((y**2-x**3-a*x-b)%37 == 0):
+                Eab.add((x, y))
+    for i in Eab:
+        app.placePoint(i, "blue")
+        
+    
     app.mainloop() 
