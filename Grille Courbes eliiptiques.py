@@ -5,7 +5,7 @@ Created on Wed Apr 25 14:01:19 2018
 @author: urand Théophane
 """
 import tkinter as tk
-p = 43
+p = 37
 a, b = 14,31
 class App(tk.Tk):
     def __init__(self):
@@ -29,49 +29,26 @@ class App(tk.Tk):
         Py = 500 - point[1]*500/(p-1) + 50
         self.can.create_oval(Px-5, Py-5, Px+5, Py+5, fill = color)
                     
+def show(a,b, color):
+    for i in courbeElliptique[(a,b)]:
+        app.placePoint(i, color)
         
 if __name__=="__main__":
     app = App()
-    Eab = set()
-    a = 14
-    b = 7
-    for x in range (p):
-        for y in range (p):
-            if ((y**2-x**3-a*x-b)%p == 0):
-                Eab.add((x, y))
-    for i in Eab:
-        app.placePoint(i, "magenta")
-        
-    Eab = set()
-    a = 22
-    b = 13
-    for x in range (p):
-        for y in range (p):
-            if ((y**2-x**3-a*x-b)%p == 0):
-                Eab.add((x, y))
-    for i in Eab:
-        app.placePoint(i, "green")
-
-    Eab = set()
-    a = 8
-    b = 7
-    for x in range (p):
-        for y in range (p):
-            if ((y**2-x**3-a*x-b)%p == 0):
-                Eab.add((x, y))
-    for i in Eab:
-        app.placePoint(i, "red")
-        
-        
-    Eab = set()
-    a = 33
-    b = 17
-    for x in range (p):
-        for y in range (p):
-            if ((y**2-x**3-a*x-b)%p == 0):
-                Eab.add((x, y))
-    for i in Eab:
-        app.placePoint(i, "blue")
-        
     
+    courbeElliptique = dict()
+    points = list()
+    for a in range (p):
+        for b in range (p):
+            for x in range (p):
+                for y in range (p):
+                    if ((y**2-x**3-a*x-b)%p == 0):
+                        points.append((x,y))
+            courbeElliptique[(a,b)] = points
+            points = list()
+            
+    show(1,3, "red")
+    show(9,17, "blue")
+    
+
     app.mainloop() 
