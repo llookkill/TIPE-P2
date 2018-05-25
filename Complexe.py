@@ -17,6 +17,13 @@ class Complexe:
         n=None
         return(Complexe(reel,imag,n))
 
+    def visualiser(self):
+        #if self.reel==0:
+           # print(self.reel,'+',self.imag,'i',sep='')
+        print(self.reel,'+',self.imag,'i',sep='')
+
+    
+
 
 k = 0     
 listComp = [None] * 49
@@ -24,3 +31,4 @@ for reel in range (7):
     for imag in range (7):
         listComp[k] = Complexe(reel, imag, k)
         k += 1
+
