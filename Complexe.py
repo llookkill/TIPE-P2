@@ -18,9 +18,16 @@ class Complexe:
         return(Complexe(reel,imag,n))
 
     def visualiser(self):
-        #if self.reel==0:
-           # print(self.reel,'+',self.imag,'i',sep='')
-        print(self.reel,'+',self.imag,'i',sep='')
+        if self.reel==0 and self.imag==1:
+            print('i')
+        elif self.reel==0:
+            print(self.imag,'i',sep='')
+        elif self.imag==1:
+            print(self.reel,'+','i',sep='')
+        elif self.imag==0:
+            print(self.reel)
+        else:
+            print(self.reel,'+',self.imag,'i',sep='')
 
     
 
