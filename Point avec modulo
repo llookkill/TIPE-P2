@@ -3,12 +3,6 @@ Created on Wed Apr 25 09:17:08 2018
 
 @author: Thomas
 """
-import tkinter as tk
-W,H,r=600,600,2
-u=30
-v=7
-g=5
-
 
 class EllipticCurve:
     
@@ -65,17 +59,16 @@ class Point:
         if isinstance(Q,Inf):
             return self
         if self == Q :
-            m = (3*(self.x)**2+self.curve.a)/(2*self.y)
+            m = (3*(self.x)**2+self.curve.a)*inverse((2*self.y),self.curve.p)
             X = m**2-2*self.x
             Y = m*(self.x-X)-self.y
         
         else : 
             
-            m = (Q.y-self.y)/(Q.x-self.x)
+            m = (Q.y-self.y)*inverse((Q.x-self.x),self.curve.p)
             X = m**2-self.x-Q.x
             Y = m*(self.x-X)-self.y
         return (Point(self.curve,X%self.curve.p,Y%self.curve.p))
-    
     
     def __mul__(self,n):
         
@@ -91,7 +84,11 @@ class Point:
             return(prod)
         else :
             raise ValueError("Expected n to be a positiv integer")
-            
+    def __rmul__(self,n):
+        return(self*n)
+    def create_group(self):
+        return( [n*self for n in range(self.curve.p)])
+        
 class Inf(Point):
     
     """The custom infinity point"""
