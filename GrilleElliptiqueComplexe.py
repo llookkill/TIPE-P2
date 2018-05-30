@@ -1,11 +1,5 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Apr 25 14:01:19 2018
-
-@author: urand Théophane
-"""
 import tkinter as tk
-p = 7
+p = 49
 class App(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
@@ -31,37 +25,85 @@ class App(tk.Tk):
 def show(a,b, color):
     for i in courbeElliptique[(a,b)]:
         app.placePoint(i, color)
-        
+
 class Complexe:
     def __init__(self, reel, imag, num):
         self.reel = reel
         self.imag = imag
         self.n = num
         
+    def __str__(self):
         
-    def __add__(self,compB):
-        reel = self.reel + compB.reel
-        imag = self.imag + compB.imag
-        n=None
-        return(Complexe(reel, imag, n))
+        if self.reel==0 and self.imag==1:
+            return ('i')
+        elif self.imag==0:
+            return ("{}".format(self.reel))
+        elif self.reel==0:
+            return ("{}i".format(self.imag))
+        elif self.imag==1:
+            return ("{}+i".format(self.reel))
+        elif self.imag<0:
+            return ("{}{}i".format(self.reel,self.imag))
+        else:
+            return ("{}+{}i".format(self.reel,self.imag))
         
-    def __sub__(self,compB):
-        reel = self.reel - compB.reel
-        imag = self.imag - compB.imag
-        n=None
-        return(Complexe(reel, imag, n))
-    
-    def __mul__(self,compB):
-        reel=self.reel*compB.reel-self.imag*compB.imag
-        imag=self.reel*compB.imag+self.imag*compB.reel
-        n=None
-        return(Complexe(reel,imag,n))
+    def __add__(self,B):
         
-    def __pow__(self, n):
-        for k in range (n):
-            a = self * self
-        return a
+        if isinstance(B,float) or isinstance(B,int):
+            reel = self.reel + B
+            imag = self.imag 
+            
+        if isinstance(B,Complexe):
+            reel = self.reel + B.reel
+            imag = self.imag + B.imag
+            
+        return(Complexe(reel, imag, None))
+        
+    def __radd__(self,B):
+        return(self+B)
+        
+    def __neg__(self):
+        
+        return(Complexe(-self.reel,-self.imag,self.n))
+        
+    def __mul__(self,B):
+        
+        if isinstance(self,Complexe) and isinstance(B,Complexe) : #isinstance is a test for class for example : isinstance(A,Complexe) return True if A is an object from the class Complexe.
+            
+            reel = self.reel*B.reel-self.imag*B.imag
+            imag = self.reel*B.imag+self.imag*B.reel
+            return(Complexe(reel,imag,None))
+            
+        if isinstance(self,Complexe) and isinstance(B,int):
+            
+            reel = self.reel*B
+            imag = self.imag*B
+            return(Complexe(reel,imag,None))
+            
+    def __rmul__(self,B):
+        return(self*B)
 
+    def __sub__(self,compB):
+        return(self + -compB)
+    def __eq__(self,B):
+        return (self.reel == B.reel and self.imag == B.imag)
+    
+    def __mod__(self, scalaire):
+        return(Complexe(self.reel % scalaire, self.imag % scalaire, None))
+    
+#    def __pow__(self,puissance):
+#        reel = self.reel
+#        imag = self.imag
+#        for k in range(puissance-1):
+#            reel,imag = reel*self.reel-imag*self.imag,reel*self.imag+imag*self.reel
+#        n = None
+#        return(Complexe(reel,imag,n))
+
+    def __pow__(self,p):
+        prod = 1
+        for i in range(p):
+            prod = prod*self
+        return (prod)
 
 k = 0     
 listComp = [None] * 49
@@ -69,7 +111,6 @@ for reel in range (7):
     for imag in range (7):
         listComp[k] = Complexe(reel, imag, k)
         k += 1
-
         
 if __name__=="__main__":
     app = App()
@@ -80,11 +121,13 @@ if __name__=="__main__":
         for b in range (p):
             for x in listComp:
                 for y in listComp:
-                    if ((y**2-x**3-a*x-b)%p == 0):
-                        points.append((x.num, y.num))
+                    if ((y**2-x**3-a*x-b) % p == listComp[0]):
+                        points.append((x.n, y.n))
             courbeElliptique[(a,b)] = points
             points = list()
     
-    show(1,1, "red")
+    for a in range (p):
+        for b in range (p):
+            show(a, b, "red")
 
     app.mainloop() 
