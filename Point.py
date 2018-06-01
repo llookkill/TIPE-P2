@@ -1,6 +1,5 @@
 """
 Created on Wed Apr 25 09:17:08 2018
-
 @author: Thomas
 """
 
@@ -109,16 +108,12 @@ class Inf(Point):
 def inverse(a,b):
     """ return the inverse of a modulo b """
     (c1,u1,v1),(c2,u2,v2)=(a,1,0),(b,0,1)
+    l = []
     while c2>0:
+        l.append(c2)
         q=c1//c2
         (c1,u1,v1),(c2,u2,v2)=(c2,u2,v2),(c1-q*c2,u1-q*u2,v1-q*v2)
+    if 1 not in l :
+        raise ValueError("{} is not inversible in z/{}z".format(a,b))
+        
     return (u1)
-     
-     
-# Pre-defined exemple 
-
-if __name__=="__main__":
-    El=EllipticCurve(1,1,37)
-    El.create_all_point()
-    for point in El.list_point:
-        print(point)
