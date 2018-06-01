@@ -1,5 +1,7 @@
 import tkinter as tk
-p = 49
+c = 5
+p = c**2
+
 class App(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
@@ -88,9 +90,6 @@ class Complexe:
     def __eq__(self,B):
         return (self.reel == B.reel and self.imag == B.imag)
     
-    def __mod__(self, scalaire):
-        return(Complexe(self.reel % scalaire, self.imag % scalaire, None))
-    
 #    def __pow__(self,puissance):
 #        reel = self.reel
 #        imag = self.imag
@@ -106,9 +105,9 @@ class Complexe:
         return (prod)
 
 k = 0     
-listComp = [None] * 49
-for reel in range (7):
-    for imag in range (7):
+listComp = [None] * c**2
+for reel in range (c):
+    for imag in range (c):
         listComp[k] = Complexe(reel, imag, k)
         k += 1
         
@@ -126,8 +125,9 @@ if __name__=="__main__":
             courbeElliptique[(a,b)] = points
             points = list()
     
-    for a in range (p):
-        for b in range (p):
-            show(a, b, "red")
+#    for a in range (p):
+#        for b in range (p):
+#            show(a, b, "red")
+    show(6, 2, "blue")
 
     app.mainloop() 
