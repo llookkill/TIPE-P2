@@ -15,27 +15,31 @@ Created on Wed May 30 11:24:16 2018
 from Point import*
 
 
-
-
-def createGroupP(p):
-    grP = list()
-    grP.append(p)
-    if(p.y == 0):
-        grP.append(Inf(p.curve))
-    else:
-        q = p+p
-        n=0
-        while (q != -p and q != p):
-            grP.append(q)
-            q = q+p
-        grP.append(Inf(p.curve))
-    return(grP)
-
 if __name__=="__main__":
-    El=EllipticCurve(1,1,37)
-    El.create_all_point()
-    groupePointP = createGroupP(El.list_point[0])
-    for grosCaca in groupePointP:
-        print(grosCaca)
-
-    
+    pUtilises = set()
+    pFacteur = set()
+    for a in range (100):
+        for b in range (100):
+            El=EllipticCurve(a,b,100)
+            El.create_all_point()
+            for p in El.list_point:
+                grP = list()
+                grP.append(p)
+                if(p.y == 0):
+                    grP.append(Inf(p.curve))
+                else:
+                    q = p+p
+                    n=0
+                    while (q not in grP):
+                        grP.append(q)
+                        try :
+                            aux = q
+                            q = q+p
+                        except:
+                            pFacteur.add(aux)
+                            break
+                
+                setG = set(grP)
+                pUtilises.union(setG)
+                                    
+                                    
