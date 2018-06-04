@@ -10,7 +10,7 @@ Created on Wed May 30 11:24:16 2018
 # On a des éléments p (points) avec une ordonnée et une abscisse 
 # p : (a, b)
 
-#Courbe elliptique ---> P + P = Q = 2P (selon les régles précédentes)
+#Courbe elliptique ---> P + P = Q = 2P (selon les règles précédentes)
 
 from Point import*
 
@@ -52,7 +52,7 @@ Created on Wed May 30 11:24:16 2018
 # On a des éléments p (points) avec une ordonnée et une abscisse 
 # p : (a, b)
 
-#Courbe elliptique ---> P + P = Q = 2P (selon les régles précédentes)
+#Courbe elliptique ---> P + P = Q = 2P (selon les règles précédentes)
 
 from Point import*
 
@@ -64,7 +64,7 @@ if __name__=="__main__":
     #Liste des points qui ont été testés
     pUtilises = list()
     
-    #liste des points facteus de p
+    #liste des points facteurs de p
     pFacteur = list()
     
     #On boucle sur les différentes courbes
@@ -74,7 +74,7 @@ if __name__=="__main__":
             #On créé la courbe
             El=EllipticCurve(a,b,k)
             
-            #On enregistre tous les points à coordonnées entieres sur cette courbe
+            #On enregistre tous les points à coordonnées entières sur cette courbe
             El.create_all_point()
             
             #On boucle sur tous les points de la courbe
