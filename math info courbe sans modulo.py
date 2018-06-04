@@ -148,6 +148,7 @@ def inverse(a,b):
 # Pre-defined exemple 
 
 App = Application()
-El=EllipticCurve(1,1,App)
+El=EllipticCurve(-0.5,25,App)
+
 El.draw()
 App.mainloop()
