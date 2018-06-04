@@ -33,6 +33,9 @@ def show(a,b, color):
         app.placePoint(i, color)
         
 class Complexe:
+    """Objets créé à partir d'un carré non existant (à l'image des complexes dans R)
+    Un objet complexe à une valeur réelle, une valeur imaginaire, et un numéro arbitraire
+    """
     def __init__(self, reel, imag, num):
         self.reel = reel
         self.imag = imag
@@ -40,6 +43,8 @@ class Complexe:
         
         
     def __add__(self,compB):
+        """On définit l'adition de deux complexes comme l'addition des valeurs entieres entre elles et l'addition des valeurs imaginaires entre elles
+        """
         reel = self.reel + compB.reel
         imag = self.imag + compB.imag
         n=None
@@ -52,6 +57,7 @@ class Complexe:
         return(Complexe(reel, imag, n))
     
     def __mul__(self,compB):
+        """La multiplication est semblable à celle des complexes dans C au détail pres que les valeurs réelles et imaginaires sont modulo p)"""
         reel=self.reel*compB.reel-self.imag*compB.imag
         imag=self.reel*compB.imag+self.imag*compB.reel
         n=None
