@@ -36,15 +36,21 @@ class Point:
         self.curve = curve
         self.x = x 
         self.y = y
-        
+    
+    def __repr__(self):
+        return( "Point : Coordonées({}, {})".format(self.x, self.y))
+    
     def __str__(self):
         return ('({}, {})'.format(self.x, self.y))
+    
+    def __hash__(self):
+        return(hash(self.__repr__()))
 
     def __getitem__(self, index):
         return [self.x, self.y][index]
 
     def __eq__(self, Q):
-        return (self.curve, self.x, self.y) == (Q.curve, Q.x, Q.y)
+        return (self.x, self.y) == (Q.x, Q.y)
 
     def __neg__(self):
         return Point(self.curve, self.x, -self.y)
@@ -83,10 +89,10 @@ class Point:
             return(prod)
         else :
             raise ValueError("Expected n to be a positiv integer")
+            
     def __rmul__(self,n):
         return(self*n)
-    def create_group(self):
-        return( [n*self for n in range(self.curve.p)])
+        
         
 class Inf(Point):
     
@@ -94,17 +100,22 @@ class Inf(Point):
     
     def __init__(self, curve):
         self.curve = curve
-        
+        self.x=self.y='inf'
     def __str__(self):
         return ("I'm like the infinity")
     
+    def __repr__(self):
+        return("point à l'infini")
     def __eq__(self, Q):
         return isinstance(Q, Inf)
 
     def __neg__(self):
         """-0 = 0"""
         return self
-
+    
+    def __hash__(self):
+        return(hash(self.__repr__()))
+        
 def inverse(a,b):
     """ return the inverse of a modulo b """
     (c1,u1,v1),(c2,u2,v2)=(a,1,0),(b,0,1)
