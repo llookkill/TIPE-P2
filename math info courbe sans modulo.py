@@ -5,7 +5,7 @@ Created on Wed Apr 25 09:17:08 2018
 """
 import tkinter as tk
 W,H,r=600,600,2 #paramètre de la fenêtre
-u=30 #facteur de "zoom" de l'axe des abscisse 
+u=30 #facteur de "zoom" de l'axe des abscisses 
 v=10 #facteur de "zoom" de l'axe des ordonées
 g=5
 
@@ -20,12 +20,12 @@ class Application(tk.Tk):
 class EllipticCurve:
     
     def __init__(self, a, b, application):
-        self.a = a #coef a
-        self.b = b #coef b
+        self.a = a #coeff a
+        self.b = b #coeff b
         self.list_point = [] # liste des points appartenant à la courbe 
         self.app=application
         
-    def __eq__(self, C): # définie l'égalité de deux courbes
+    def __eq__(self, C): # définit l'égalité de deux courbes
         return (self.a, self.b) == (C.a, C.b)
 
     def has_point(self, x, y): # vérifie si le point de coord (x,y) est sur la courbe
@@ -34,10 +34,10 @@ class EllipticCurve:
     def __str__(self): #affichage plus propre de la courbe en format texte
         return ('y^2 = x^3 + {}x + {}'.format(self.a, self.b))
     
-    def function(self,x): #fonction associé à la courbe
+    def function(self,x): #fonction associée à la courbe
         return (x ** 3 + self.a * x + self.b)**0.5
     
-    def draw(self): #fonction qui dessine la courbe avec tout ses point dessus
+    def draw(self): #fonction qui dessine la courbe avec tous ses points dessus
         
         self.app.can.create_line(W/g,0,W/g,H,fill='black',width=0)
         self.app.can.create_line(0,H/2,W,H/2,fill='black',width=0)
@@ -60,11 +60,11 @@ class Point:
     """A point on a specific curve."""
     
     def __init__(self, curve, x, y):
-        self.curve = curve # la courbe sur laquelle le point est dessus
+        self.curve = curve # la courbe sur laquelle le point
         self.x = x 
         self.y = y
         self.curve.list_point.append(self)
-# si on veut vérifie que le point est sur la courbe 
+# si on veut vérifier que le point est sur la courbe 
 #        if not self.curve.has_point(x, y):
 #            raise ValueError('{} is not on curve {}'.format(self, self.curve))
         
@@ -74,15 +74,15 @@ class Point:
     def __getitem__(self, index): # permet de faire Point[0] et Point[1] qui renvoient respectivement x et y
         return [self.x, self.y][index]
 
-    def __eq__(self, Q):# on définie l'égalité de deux points
+    def __eq__(self, Q):# on définit l'égalité de deux points
         return (self.curve, self.x, self.y) == (Q.curve, Q.x, Q.y)
 
-    def __neg__(self): #on définie l'opposé d'un point
+    def __neg__(self): #on définit l'opposé d'un point
         return Point(self.curve, self.x, -self.y)
     
-    def __add__(self,Q):# on définie l'addition de points
+    def __add__(self,Q):# on définit l'addition de points
         
-        #si l'un des point est un point à l'infini
+        #si l'un des points est un point à l'infini
         if isinstance(self,Inf) and isinstance(Q,Inf):
             return Q
         if isinstance(self,Inf):
@@ -130,7 +130,7 @@ class Inf(Point): #définition d'un point particulier, un point à l'infini qui 
         self.curve = curve
         
     def __str__(self):
-        return (" i'm like infinity")
+        return (" I'm like infinity")
     
     def __eq__(self, Q):
         return isinstance(Q, Inf)
