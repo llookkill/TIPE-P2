@@ -69,12 +69,10 @@ class Complexe:
         return a
 
 
-k = 0     
 listComp = [None] * 49
-for reel in range (7):
-    for imag in range (7):
-        listComp[k] = Complexe(reel, imag, k)
-        k += 1
+for reel in range (p):
+    for imag in range (p):
+        listComp[k] = Complexe(reel, imag, reel+c*imag)
 
         
 if __name__=="__main__":
@@ -87,7 +85,7 @@ if __name__=="__main__":
             for x in listComp:
                 for y in listComp:
                     if ((y**2-x**3-a*x-b)%p == 0):
-                        points.append((x.num, y.num))
+                        points.append((x.n, y.n))
             courbeElliptique[(a,b)] = points
             points = list()
     
