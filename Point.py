@@ -3,12 +3,12 @@ Created on Wed Apr 25 09:17:08 2018
 @author: Thomas
 """
 
-class EllipticCurve:
+class EllipticCurve: #classe de la courbe
     
     def __init__(self, a, b, p):
         self.a = a
         self.b = b
-        self.p = p
+        self.p = p # ajout d'un paramètre p pour le modulo
         self.list_point = []
 
         
@@ -21,15 +21,14 @@ class EllipticCurve:
     def __str__(self):
         return ('y^2 = x^3 + {}x + {} modulo {}'.format(self.a, self.b,self.p))
     
-    def function(self,x):
-        return (x ** 3 + self.a * x + self.b)**0.5 % self.p
-    
-    def create_all_point(self):
+    def create_all_point(self):# on crée tous les points de la courbe que l'on enregistre dans list_point
         for x in range(self.p):
             for y in range(self.p):
                 if self.has_point(x,y):
                     self.list_point.append(Point(self,x,y))
-class Point:
+                    
+class Point: 
+    
     """A point on a specific curve."""
     
     def __init__(self, curve, x, y):
@@ -37,13 +36,13 @@ class Point:
         self.x = x 
         self.y = y
     
-    def __repr__(self):
+    def __repr__(self): #repésentation du Point dans l'interpréteur
         return( "Point : Coordonées({}, {})".format(self.x, self.y))
     
     def __str__(self):
         return ('({}, {})'.format(self.x, self.y))
     
-    def __hash__(self):
+    def __hash__(self): #permet de définir un hash identique pour deux points de même coordonées (utile pour faire des set de points)
         return(hash(self.__repr__()))
 
     def __getitem__(self, index):
@@ -55,7 +54,7 @@ class Point:
     def __neg__(self):
         return Point(self.curve, self.x, -self.y)
     
-    def __add__(self,Q):
+    def __add__(self,Q): #ajout du modulo p dans les calculs de l'addition ainsi que la fonction inverse()
         
         if isinstance(self,Inf) and isinstance(Q,Inf):
             return Q
@@ -116,7 +115,7 @@ class Inf(Point):
     def __hash__(self):
         return(hash(self.__repr__()))
         
-def inverse(a,b):
+def inverse(a,b): # définition de la fonction qui renvoie l'inverse de a modulo b via l'algorithme d'Euclide étendu
     """ return the inverse of a modulo b """
     (c1,u1,v1),(c2,u2,v2)=(a,1,0),(b,0,1)
     l = []
@@ -124,7 +123,7 @@ def inverse(a,b):
         l.append(c2)
         q=c1//c2
         (c1,u1,v1),(c2,u2,v2)=(c2,u2,v2),(c1-q*c2,u1-q*u2,v1-q*v2)
-    if 1 not in l :
+    if 1 not in l : # on vérifie que c'est bien l'inverse sinon on retourne une erreur  
         raise ValueError("{} is not inversible in z/{}z".format(a,b))
         
     return (u1)
